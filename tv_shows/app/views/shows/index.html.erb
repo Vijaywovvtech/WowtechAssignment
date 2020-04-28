@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Shows</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th>ID</th>
+      <td>Show Name</td>
+      <th>Channel</th>
+      <th>Timing</th>
+      <th>Favourite</th>
+      <th colspan="3">Actions</th>
+    </tr>
+    <% @shows.each do |show| %>
+      <tr>
+        <td><%= show.id %></td>
+        <td><%= show.name %></td>
+        <td><%= show.channel.name %></td>
+        <td><%= show.start_time %> - <%= show.end_time %></td>
+        <td>
+          <%= form_for('show', url: {action: 'favourite'}) do |f| %>
+              <%= f.text_field :id, hidden: true, value: show.id.to_i %>
+              <% if @user.favourite_shows.include?(show.id) %>
+                <%= f.submit 'Remove from Favourite' %>
+              <% else %>
+                <%= f.submit 'Add to Favourite' %>
+              <% end %>  
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', show %></td>
+        <td><%= link_to 'Edit', edit_show_path(show) %></td>
+        <td><%= link_to 'Destroy', show, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+  <%= form_tag shows_path, method: 'get' do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", name: nil%>
+  <% end %>
+
+</table>
+
+<br>
+
+<%= link_to 'New Show', new_show_path %>

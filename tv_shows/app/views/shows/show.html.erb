@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+	<tr>
+		<td>Show Name</td>
+		<td>Channel Name</td>
+		<td>Start Time</td>
+		<td>End Time</td>
+		<td>Action</td>
+	</tr>
+	<tr>
+		<th><%= @show.name %></th>
+		<th><%= @show.channel.name %></th>
+		<th><%= @show.start_time %></th>
+		<th><%= @show.end_time %></th>
+		<th>
+			<%= form_for('show', url: {action: 'favourite'}) do |f| %>
+				<%= f.text_field :id, hidden: true, value: @show.id.to_i %>
+				<% if @user.favourite_shows.include?(@show.id) %>
+		    		<%= f.submit 'Remove from Favourite' %>
+	    		<% else %>
+		    		<%= f.submit 'Add to Favourite' %>
+	    		<% end %>
+			<% end %>
+		</th>
+	</tr>
+</table>
+<%= link_to 'Edit', edit_show_path(@show) %> |
+<%= link_to 'Back', shows_path %>

@@ -1,0 +1,21 @@
+<%= form_for(@show) do |f| %>
+  <%= f.text_field :name, placeholder: "Name" %>
+  <%= f.text_field :start_time, placeholder: "Start Time (eg: 18:30)" %>
+  <%= f.text_field :end_time, placeholder: "End Time (eg: 19:30)" %>
+  <%= f.collection_select :channel_id, Channel.all, :id, :name %>
+  <% if @show.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@show.errors.count, "error") %> prohibited this show from being saved:</h2>
+
+      <ul>
+      <% @show.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
