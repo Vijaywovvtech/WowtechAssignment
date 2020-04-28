@@ -11,7 +11,7 @@ class Show < ActiveRecord::Base
 	end
 
 	def self.get_shows
-		Show.where("to_timestamp(start_time,'HH:MM') > now() - interval '30 mins'")
+		Show.where("(start_time - now()) = interval '30 mins'")
 	end
 
 end

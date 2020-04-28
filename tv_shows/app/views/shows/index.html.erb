@@ -23,7 +23,7 @@
         <td><%= show.id %></td>
         <td><%= show.name %></td>
         <td><%= show.channel.name %></td>
-        <td><%= show.start_time %> - <%= show.end_time %></td>
+        <td><%= show.start_time.strftime('%H:%M') %> - <%= show.end_time.strftime('%H:%M') %></td>
         <td>
           <%= form_for('show', url: {action: 'favourite'}) do |f| %>
               <%= f.text_field :id, hidden: true, value: show.id.to_i %>

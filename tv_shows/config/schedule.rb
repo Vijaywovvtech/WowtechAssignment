@@ -18,10 +18,14 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+if Rails.env.production?
+	set :environment, "production"
+else
+	set :environment, "development"
+end
 
 set :output, "/path/to/my/cron_log.log"
 
-every 1.minutes do
-  runner "Show.get_shows"
-  rake "my_namespace:notify_user"
+every 1.minute do
+  rake "notify_user"
 end

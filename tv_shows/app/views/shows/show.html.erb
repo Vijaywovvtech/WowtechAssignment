@@ -11,8 +11,8 @@
 	<tr>
 		<th><%= @show.name %></th>
 		<th><%= @show.channel.name %></th>
-		<th><%= @show.start_time %></th>
-		<th><%= @show.end_time %></th>
+		<th><%= @show.start_time.strftime('%H:%M') %></th>
+		<th><%= @show.end_time.strftime('%H:%M') %></th>
 		<th>
 			<%= form_for('show', url: {action: 'favourite'}) do |f| %>
 				<%= f.text_field :id, hidden: true, value: @show.id.to_i %>
